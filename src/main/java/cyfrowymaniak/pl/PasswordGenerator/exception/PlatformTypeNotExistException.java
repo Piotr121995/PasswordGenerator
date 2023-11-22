@@ -1,4 +1,4 @@
-package cyfrowymaniak.pl.PasswordGenerator.Exceptions;
+package cyfrowymaniak.pl.PasswordGenerator.exception;
 
 public class PlatformTypeNotExistException extends RuntimeException {
 

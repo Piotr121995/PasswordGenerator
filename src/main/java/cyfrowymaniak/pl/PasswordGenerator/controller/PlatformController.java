@@ -1,6 +1,8 @@
-package cyfrowymaniak.pl.PasswordGenerator;
+package cyfrowymaniak.pl.PasswordGenerator.controller;
 
 
+import cyfrowymaniak.pl.PasswordGenerator.entity.Platform;
+import cyfrowymaniak.pl.PasswordGenerator.service.PlatformService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/platformApi")
 public class PlatformController {
 
     private final PlatformService platformService;
@@ -21,13 +23,13 @@ public class PlatformController {
 
     @PostMapping("/platform")
     public ResponseEntity<Platform> addPlatform(@RequestBody Platform newPlatform) {
-        platformService.create(newPlatform);
+        platformService.createPlatform(newPlatform);
         return new ResponseEntity<>(newPlatform, HttpStatus.CREATED);
 
     }
 
     @PutMapping("/platform/{id}")
-    public ResponseEntity<Platform> updatePlatform(@RequestBody Platform newPlatform, @PathVariable Long id) {
+    public ResponseEntity<Platform> updatePlatform(@PathVariable Long id, @RequestBody Platform newPlatform) {
         Platform update = platformService.updatePlatform(id, newPlatform);
 
         return new ResponseEntity<>(update, HttpStatus.CREATED);

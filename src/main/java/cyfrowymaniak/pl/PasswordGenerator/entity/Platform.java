@@ -1,7 +1,6 @@
-package cyfrowymaniak.pl.PasswordGenerator;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import cyfrowymaniak.pl.PasswordGenerator.PlatformType.PlatformType;
+package cyfrowymaniak.pl.PasswordGenerator.entity;
+
+import cyfrowymaniak.pl.PasswordGenerator.entity.PlatformType;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -13,16 +12,15 @@ public class Platform {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String PlatformName;
+    private String platformName;
 
 
     @OneToMany(mappedBy = "platform")
-
     private List<PlatformType> platformTypeList;
 
     public Platform(Long id, String platformName, List<PlatformType> platformTypeList) {
         this.id = id;
-        PlatformName = platformName;
+        this.platformName = platformName;
         this.platformTypeList = platformTypeList;
     }
 
@@ -38,11 +36,11 @@ public class Platform {
     }
 
     public String getPlatformName() {
-        return PlatformName;
+        return platformName;
     }
 
     public void setPlatformName(String platformName) {
-        PlatformName = platformName;
+        this.platformName = platformName;
     }
 
     public List<PlatformType> getPlatformTypeList() {

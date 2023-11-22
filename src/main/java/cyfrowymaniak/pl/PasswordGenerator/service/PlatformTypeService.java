@@ -1,8 +1,9 @@
-package cyfrowymaniak.pl.PasswordGenerator.PlatformType;
+package cyfrowymaniak.pl.PasswordGenerator.service;
 
-import cyfrowymaniak.pl.PasswordGenerator.Exceptions.PlatformTypeNotExistException;
-import cyfrowymaniak.pl.PasswordGenerator.Platform;
-import cyfrowymaniak.pl.PasswordGenerator.PlatformService;
+import cyfrowymaniak.pl.PasswordGenerator.entity.PlatformType;
+import cyfrowymaniak.pl.PasswordGenerator.exception.PlatformTypeNotExistException;
+import cyfrowymaniak.pl.PasswordGenerator.entity.Platform;
+import cyfrowymaniak.pl.PasswordGenerator.repository.PlatformTypeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,27 +36,23 @@ public class PlatformTypeService {
     public PlatformType getPlatformyType(Long id) {
         Optional<PlatformType> byId = platformTypeRepo.findById(id);
         return byId.orElseThrow(() -> new PlatformTypeNotExistException(id));
-
-
- /*   public Platform update(Long id, Platform platform) {
-        Optional<Platform> byId = platformRepo.findById(id);
-        if (byId.isPresent()) {
-            Platform oldPlatform = byId.get();
-            oldPlatform.setName(platform.getName());
-            return platformRepo.save(oldPlatform);
-        } else throw new PlatformNotExistException(id);*/
- /*   }
-
-    public void delete(Long id) {
-        Optional<Platform> byId = platformRepo.findById(id);
-        if (byId.isPresent()) {
-            Long id1 = byId.get().getId();
-            platformRepo.deleteById(id1);
-        } else throw new PlatformNotFoundException(id);
     }
-*/
+
+    public PlatformType updatePlatformType(Long id, PlatformType platformType ) {
+        PlatformType oldPlatformyType = getPlatformyType(id);
+        oldPlatformyType.setPlatformTypeName(platformType.getPlatformTypeName());
+        return platformTypeRepo.save(oldPlatformyType);
+    }
+
+    public void deletePlatformType(Long id){
+        PlatformType platformyType = getPlatformyType(id);
+        Long id1 = platformyType.getId();
+        platformTypeRepo.deleteById(id1);
     }
 }
+
+
+
 
 
 

@@ -1,8 +1,9 @@
-package cyfrowymaniak.pl.PasswordGenerator.PlatformType;
+package cyfrowymaniak.pl.PasswordGenerator.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import cyfrowymaniak.pl.PasswordGenerator.Platform;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class PlatformType {
@@ -17,11 +18,14 @@ public class PlatformType {
     @JsonBackReference
     private Platform platform;
 
+    @OneToMany(mappedBy = "platformType")
+    private List<Login> loginList;
 
-    public PlatformType(Long id, String platformTypeName, Platform platform) {
+    public PlatformType(Long id, String platformTypeName, Platform platform, List<Login> loginList) {
         this.id = id;
         this.platformTypeName = platformTypeName;
         this.platform = platform;
+        this.loginList = loginList;
     }
 
     public PlatformType() {
@@ -49,5 +53,13 @@ public class PlatformType {
 
     public void setPlatform(Platform platform) {
         this.platform = platform;
+    }
+
+    public List<Login> getLoginList() {
+        return loginList;
+    }
+
+    public void setLoginList(List<Login> loginList) {
+        this.loginList = loginList;
     }
 }

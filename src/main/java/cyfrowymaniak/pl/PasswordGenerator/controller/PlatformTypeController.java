@@ -1,6 +1,9 @@
-package cyfrowymaniak.pl.PasswordGenerator.PlatformType;
+package cyfrowymaniak.pl.PasswordGenerator.controller;
 
-import cyfrowymaniak.pl.PasswordGenerator.Platform;
+import cyfrowymaniak.pl.PasswordGenerator.entity.Platform;
+import cyfrowymaniak.pl.PasswordGenerator.entity.PlatformType;
+import cyfrowymaniak.pl.PasswordGenerator.service.PlatformTypeService;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api2")
+@RequestMapping("/platformTypeApi")
 public class PlatformTypeController {
 
     private final PlatformTypeService platformTypeService;
@@ -26,8 +29,9 @@ public class PlatformTypeController {
     }
 
     @GetMapping("/all")
-    public List<PlatformType> getAllPlatformTypes() {
-        return platformTypeService.getAllPlatformTypes();
+    public ResponseEntity<List<PlatformType>> getAllPlatformTypes() {
+        List<PlatformType> allPlatformTypes = platformTypeService.getAllPlatformTypes();
+        return new ResponseEntity<>(allPlatformTypes, HttpStatus.OK);
     }
 
     @GetMapping("/platformType/{id}")
@@ -36,4 +40,16 @@ public class PlatformTypeController {
         return new ResponseEntity<>(platformyType, HttpStatus.OK);
 
     }
+
+    @PutMapping("/platformType/{id}")
+    public ResponseEntity<PlatformType> updatePlatformType(@PathVariable Long id, @RequestBody PlatformType platformType) {
+        PlatformType oldPlatformType = platformTypeService.updatePlatformType(id, platformType);
+        return new ResponseEntity<>(oldPlatformType, HttpStatus.CREATED);
+    }
+    @DeleteMapping("/platformType/{id}")
+    public ResponseEntity<Void> deletePlatformTypeById(@PathVariable Long id) {
+        platformTypeService.deletePlatformType(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }
