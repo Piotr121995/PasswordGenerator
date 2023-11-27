@@ -12,16 +12,21 @@ public class Login {
     private Long id;
     private String login;
 
-    public Login(Long id, String login, PlatformType platformType) {
-        this.id = id;
-        this.login = login;
-        this.platformType = platformType;
-    }
 
     @ManyToOne
     @JoinColumn(name = "PlatformyType_Id")
     @JsonBackReference
     private PlatformType platformType;
+
+    public Login(Long id, String login, PlatformType platformType, Password password) {
+        this.id = id;
+        this.login = login;
+        this.platformType = platformType;
+        this.password = password;
+    }
+
+    @OneToOne(mappedBy ="login")
+    private Password password;
 
     public Login() {
     }
@@ -48,5 +53,13 @@ public class Login {
 
     public void setPlatformType(PlatformType platformType) {
         this.platformType = platformType;
+    }
+
+    public Password getPassword() {
+        return password;
+    }
+
+    public void setPassword(Password password) {
+        this.password = password;
     }
 }

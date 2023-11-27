@@ -21,4 +21,8 @@ public class PlatformNotFoundAdvice {
     public ResponseEntity<String> platformNotExistHandler(LoginNotExistException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
+    @ExceptionHandler(PasswordNotExistException.class)
+    public ResponseEntity<String> passwordNotExistHandler(PasswordNotExistException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
 }

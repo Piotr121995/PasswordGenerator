@@ -1,10 +1,8 @@
 package cyfrowymaniak.pl.PasswordGenerator.service;
 
 import cyfrowymaniak.pl.PasswordGenerator.entity.Login;
-import cyfrowymaniak.pl.PasswordGenerator.entity.Platform;
 import cyfrowymaniak.pl.PasswordGenerator.entity.PlatformType;
 import cyfrowymaniak.pl.PasswordGenerator.exception.LoginNotExistException;
-import cyfrowymaniak.pl.PasswordGenerator.exception.PlatformTypeNotExistException;
 import cyfrowymaniak.pl.PasswordGenerator.repository.LoginRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +22,8 @@ public class LoginService {
         this.platformTypeService = platformTypeService;
         this.loginRepo = loginRepo;
     }
+
+
 
 
     public Login createLogin(Login login, Long id) {
